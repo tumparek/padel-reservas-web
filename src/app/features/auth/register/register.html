@@ -1,0 +1,104 @@
+<div class="register">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+        <div class="register__card card shadow-sm">
+          <div class="card-body p-4">
+            <h1 class="register__title h3 mb-4 text-center">Crear cuenta</h1>
+
+            <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+              @if (errorMessage()) {
+                <div class="alert alert-danger" role="alert">{{ errorMessage() }}</div>
+              }
+
+              <div class="mb-3">
+                <label for="register-name" class="form-label">Nombre</label>
+                <input
+                  id="register-name"
+                  type="text"
+                  class="form-control"
+                  [class.is-invalid]="form.controls.name.invalid && form.controls.name.touched"
+                  formControlName="name"
+                  autocomplete="name"
+                />
+                @if (form.controls.name.invalid && form.controls.name.touched) {
+                  <div class="invalid-feedback">El nombre es obligatorio.</div>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="register-email" class="form-label">Email</label>
+                <input
+                  id="register-email"
+                  type="email"
+                  class="form-control"
+                  [class.is-invalid]="form.controls.email.invalid && form.controls.email.touched"
+                  formControlName="email"
+                  autocomplete="email"
+                />
+                @if (form.controls.email.invalid && form.controls.email.touched) {
+                  <div class="invalid-feedback">
+                    @if (form.controls.email.hasError('required')) {
+                      El email es obligatorio.
+                    } @else if (form.controls.email.hasError('email')) {
+                      Introduce un email válido.
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="mb-3">
+                <label for="register-password" class="form-label">Contraseña</label>
+                <input
+                  id="register-password"
+                  type="password"
+                  class="form-control"
+                  [class.is-invalid]="form.controls.password.invalid && form.controls.password.touched"
+                  formControlName="password"
+                  autocomplete="new-password"
+                />
+                @if (form.controls.password.invalid && form.controls.password.touched) {
+                  <div class="invalid-feedback">
+                    @if (form.controls.password.hasError('required')) {
+                      La contraseña es obligatoria.
+                    } @else if (form.controls.password.hasError('minlength')) {
+                      La contraseña debe tener al menos 6 caracteres.
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="mb-4">
+                <label for="register-confirm-password" class="form-label">Confirmar contraseña</label>
+                <input
+                  id="register-confirm-password"
+                  type="password"
+                  class="form-control"
+                  [class.is-invalid]="form.controls.confirmPassword.invalid && form.controls.confirmPassword.touched"
+                  formControlName="confirmPassword"
+                  autocomplete="new-password"
+                />
+                @if (form.controls.confirmPassword.invalid && form.controls.confirmPassword.touched) {
+                  <div class="invalid-feedback">Confirma la contraseña.</div>
+                }
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting()">
+                @if (isSubmitting()) {
+                  <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                  Creando cuenta...
+                } @else {
+                  Crear cuenta
+                }
+              </button>
+            </form>
+
+            <p class="register__footer text-center mt-3 mb-0">
+              ¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

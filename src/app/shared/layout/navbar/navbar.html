@@ -20,25 +20,27 @@
     <div class="collapse navbar-collapse" id="appNavbarCollapse">
       <ul class="navbar-nav app-navbar__nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <span class="app-navbar__link app-navbar__link--disabled">
+          <a
+            class="app-navbar__link"
+            routerLink="/"
+            routerLinkActive="app-navbar__link--active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
             <i class="bi bi-house-fill"></i>
             <span>Inicio</span>
-            <small class="app-navbar__badge">Próximamente</small>
-          </span>
+          </a>
         </li>
         <li class="nav-item">
-          <span class="app-navbar__link app-navbar__link--disabled">
+          <a class="app-navbar__link" routerLink="/pistas" routerLinkActive="app-navbar__link--active">
             <i class="bi bi-grid-3x3-gap-fill"></i>
             <span>Pistas</span>
-            <small class="app-navbar__badge">Próximamente</small>
-          </span>
+          </a>
         </li>
         <li class="nav-item">
-          <span class="app-navbar__link app-navbar__link--disabled">
+          <a class="app-navbar__link" routerLink="/reservar" routerLinkActive="app-navbar__link--active">
             <i class="bi bi-calendar-check"></i>
             <span>Reservar</span>
-            <small class="app-navbar__badge">Próximamente</small>
-          </span>
+          </a>
         </li>
       </ul>
 
@@ -46,6 +48,24 @@
         <i class="bi bi-speedometer2"></i>
         <span>Panel admin</span>
       </a>
+
+      @if (isAuthenticated()) {
+        <div class="app-navbar__user">
+          <span class="app-navbar__user-name">
+            <i class="bi bi-person-circle"></i>
+            <span>{{ currentUser()?.name }}</span>
+          </span>
+          <button type="button" class="app-navbar__logout" (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Cerrar sesión</span>
+          </button>
+        </div>
+      } @else {
+        <div class="app-navbar__auth">
+          <a class="app-navbar__auth-link" routerLink="/login">Iniciar sesión</a>
+          <a class="app-navbar__auth-link app-navbar__auth-link--cta" routerLink="/register">Registrarse</a>
+        </div>
+      }
     </div>
   </div>
 </nav>

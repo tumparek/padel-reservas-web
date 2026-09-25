@@ -1,0 +1,68 @@
+<div class="login">
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-8 col-md-6 col-lg-4">
+        <div class="login__card card shadow-sm">
+          <div class="card-body p-4">
+            <h1 class="login__title h3 mb-4 text-center">Iniciar sesión</h1>
+
+            <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+              @if (errorMessage()) {
+                <div class="alert alert-danger" role="alert">{{ errorMessage() }}</div>
+              }
+
+              <div class="mb-3">
+                <label for="login-email" class="form-label">Email</label>
+                <input
+                  id="login-email"
+                  type="email"
+                  class="form-control"
+                  [class.is-invalid]="form.controls.email.invalid && form.controls.email.touched"
+                  formControlName="email"
+                  autocomplete="email"
+                />
+                @if (form.controls.email.invalid && form.controls.email.touched) {
+                  <div class="invalid-feedback">
+                    @if (form.controls.email.hasError('required')) {
+                      El email es obligatorio.
+                    } @else if (form.controls.email.hasError('email')) {
+                      Introduce un email válido.
+                    }
+                  </div>
+                }
+              </div>
+
+              <div class="mb-4">
+                <label for="login-password" class="form-label">Contraseña</label>
+                <input
+                  id="login-password"
+                  type="password"
+                  class="form-control"
+                  [class.is-invalid]="form.controls.password.invalid && form.controls.password.touched"
+                  formControlName="password"
+                  autocomplete="current-password"
+                />
+                @if (form.controls.password.invalid && form.controls.password.touched) {
+                  <div class="invalid-feedback">La contraseña es obligatoria.</div>
+                }
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100" [disabled]="isSubmitting()">
+                @if (isSubmitting()) {
+                  <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+                  Entrando...
+                } @else {
+                  Entrar
+                }
+              </button>
+            </form>
+
+            <p class="login__footer text-center mt-3 mb-0">
+              ¿No tienes cuenta? <a routerLink="/register">Regístrate</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

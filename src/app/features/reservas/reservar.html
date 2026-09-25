@@ -1,0 +1,83 @@
+@if (!isAuthenticated()) {
+  <div class="reservar__login-required container py-5 text-center">
+    <p class="mb-3">Debes iniciar sesión para reservar una pista.</p>
+    <a class="btn btn-primary" routerLink="/login">Iniciar sesión</a>
+  </div>
+} @else {
+  <div class="reservar">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+          <div class="reservar__card card shadow-sm">
+            <div class="card-body p-4">
+              <h1 class="reservar__title h3 mb-4 text-center">Reservar pista</h1>
+
+              @if (submitted()) {
+                <p class="reservar__confirmation alert alert-success mb-0" role="status">Reserva confirmada.</p>
+              } @else {
+                <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+                  <div class="mb-3">
+                    <label for="reservar-court" class="form-label">Pista</label>
+                    <select
+                      id="reservar-court"
+                      class="form-select"
+                      [class.is-invalid]="form.controls.court.invalid && form.controls.court.touched"
+                      formControlName="court"
+                    >
+                      <option value="" disabled>Selecciona una pista</option>
+                      @for (court of courts(); track court.id) {
+                        <option [value]="court.id">{{ court.name }}</option>
+                      }
+                    </select>
+                    @if (form.controls.court.invalid && form.controls.court.touched) {
+                      <div class="invalid-feedback">Selecciona una pista.</div>
+                    }
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="reservar-date" class="form-label">Fecha</label>
+                    <input
+                      id="reservar-date"
+                      type="date"
+                      class="form-control"
+                      [class.is-invalid]="form.controls.date.invalid && form.controls.date.touched"
+                      formControlName="date"
+                    />
+                    @if (form.controls.date.invalid && form.controls.date.touched) {
+                      <div class="invalid-feedback">La fecha es obligatoria.</div>
+                    }
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="reservar-time" class="form-label">Hora</label>
+                    <input
+                      id="reservar-time"
+                      type="time"
+                      class="form-control"
+                      [class.is-invalid]="form.controls.time.invalid && form.controls.time.touched"
+                      formControlName="time"
+                    />
+                    @if (form.controls.time.invalid && form.controls.time.touched) {
+                      <div class="invalid-feedback">La hora es obligatoria.</div>
+                    }
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="reservar-duration" class="form-label">Duración</label>
+                    <select id="reservar-duration" class="form-select" formControlName="durationMinutes">
+                      <option [value]="60">60 minutos</option>
+                      <option [value]="90">90 minutos</option>
+                      <option [value]="120">120 minutos</option>
+                    </select>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100">Confirmar reserva</button>
+                </form>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
