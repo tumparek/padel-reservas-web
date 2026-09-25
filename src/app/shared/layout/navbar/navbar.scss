@@ -1,0 +1,80 @@
+.app-navbar {
+  background-color: #1b1f23;
+  padding: 0.75rem 1rem;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #ffffff;
+
+    i {
+      color: #2e7d32;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__toggler {
+    border-color: rgba(255, 255, 255, 0.25);
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(46, 125, 50, 0.5);
+    }
+  }
+
+  &__nav {
+    gap: 0.25rem;
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
+
+    i {
+      font-size: 1rem;
+    }
+
+    &--disabled {
+      color: rgba(255, 255, 255, 0.35);
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__badge {
+    margin-left: 0.35rem;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 0.15rem 0.4rem;
+    border-radius: 0.35rem;
+  }
+
+  &__admin-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 0.9rem;
+    border-radius: 0.5rem;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: rgba(255, 255, 255, 0.08);
+    transition: background-color 0.15s ease;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+    }
+  }
+}
