@@ -1,0 +1,25 @@
+<div class="admin-dashboard">
+  <div class="admin-dashboard__kpis">
+    <div class="admin-dashboard__kpi-card">
+      <span class="admin-dashboard__kpi-label">Reservas de hoy</span>
+      <span class="admin-dashboard__kpi-value">{{ kpis().reservasHoy }}</span>
+    </div>
+
+    <div class="admin-dashboard__kpi-card">
+      <span class="admin-dashboard__kpi-label">Ocupación</span>
+      <span class="admin-dashboard__kpi-value">{{ kpis().ocupacionPct }}%</span>
+    </div>
+
+    <div class="admin-dashboard__kpi-card">
+      <span class="admin-dashboard__kpi-label">Ingresos estimados</span>
+      <span class="admin-dashboard__kpi-value">{{ kpis().ingresosEstimados }} €</span>
+    </div>
+  </div>
+
+  <div class="admin-dashboard__chart-card">
+    <h2 class="admin-dashboard__chart-title">Ocupación semanal</h2>
+    <div class="admin-dashboard__chart-wrapper">
+      <canvas baseChart [type]="'bar'" [data]="chartData()" [options]="chartOptions"></canvas>
+    </div>
+  </div>
+</div>
