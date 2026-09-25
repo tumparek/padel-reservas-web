@@ -1,0 +1,29 @@
+.app-footer {
+  background-color: #1b1f23;
+  color: rgba(255, 255, 255, 0.65);
+  padding: 1rem 1.5rem;
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #ffffff;
+
+    i {
+      color: #2e7d32;
+    }
+  }
+
+  &__copyright {
+    font-size: 0.85rem;
+  }
+}

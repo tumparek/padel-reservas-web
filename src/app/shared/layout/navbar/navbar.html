@@ -1,5 +1,51 @@
-<nav class="navbar navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark app-navbar">
   <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">Padel Reservas</span>
+    <span class="navbar-brand app-navbar__brand">
+      <i class="bi bi-grid-1x2-fill"></i>
+      <span>Padel Reservas</span>
+    </span>
+
+    <button
+      type="button"
+      class="navbar-toggler app-navbar__toggler"
+      data-bs-toggle="collapse"
+      data-bs-target="#appNavbarCollapse"
+      aria-controls="appNavbarCollapse"
+      aria-expanded="false"
+      aria-label="Alternar navegación"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="appNavbarCollapse">
+      <ul class="navbar-nav app-navbar__nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <span class="app-navbar__link app-navbar__link--disabled">
+            <i class="bi bi-house-fill"></i>
+            <span>Inicio</span>
+            <small class="app-navbar__badge">Próximamente</small>
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="app-navbar__link app-navbar__link--disabled">
+            <i class="bi bi-grid-3x3-gap-fill"></i>
+            <span>Pistas</span>
+            <small class="app-navbar__badge">Próximamente</small>
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="app-navbar__link app-navbar__link--disabled">
+            <i class="bi bi-calendar-check"></i>
+            <span>Reservar</span>
+            <small class="app-navbar__badge">Próximamente</small>
+          </span>
+        </li>
+      </ul>
+
+      <a class="app-navbar__admin-link" routerLink="/admin">
+        <i class="bi bi-speedometer2"></i>
+        <span>Panel admin</span>
+      </a>
+    </div>
   </div>
 </nav>
