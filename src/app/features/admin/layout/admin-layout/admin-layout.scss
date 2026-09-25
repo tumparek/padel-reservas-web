@@ -1,0 +1,47 @@
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+
+  &__sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    width: 260px;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+    z-index: 1040;
+
+    @media (min-width: 992px) {
+      position: static;
+      transform: none;
+      flex-shrink: 0;
+    }
+
+    &--open {
+      transform: translateX(0);
+    }
+  }
+
+  &__backdrop {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 1030;
+
+    @media (min-width: 992px) {
+      display: none;
+    }
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__content {
+    flex: 1;
+    padding: 1.5rem;
+    background-color: #f5f6f8;
+  }
+}
