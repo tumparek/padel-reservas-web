@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
+import { AuthMockService } from '../../../features/auth/auth-mock.service';
 import { Navbar } from './navbar';
 
 describe('Navbar', () => {
@@ -23,15 +24,52 @@ describe('Navbar', () => {
     expect(adminLink?.getAttribute('href')).toBe('/admin');
   });
 
-  it('should render the placeholder links as non-interactive elements', () => {
+  it('should render working links for Inicio, Pistas and Reservar', () => {
     const fixture = TestBed.createComponent(Navbar);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    const placeholders = compiled.querySelectorAll('.app-navbar__link--disabled');
-    expect(placeholders.length).toBe(3);
-    placeholders.forEach((placeholder) => {
-      expect(placeholder.tagName).toBe('SPAN');
-      expect(placeholder.getAttribute('href')).toBeNull();
-    });
+    const links = compiled.querySelectorAll('.app-navbar__link');
+
+    expect(links.length).toBe(3);
+    expect(links[0].tagName).toBe('A');
+    expect(links[0].getAttribute('href')).toBe('/');
+    expect(links[1].getAttribute('href')).toBe('/pistas');
+    expect(links[2].getAttribute('href')).toBe('/reservar');
+  });
+
+  it('shows login/register links and no user menu when not authenticated', () => {
+    const fixture = TestBed.createComponent(Navbar);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('a[href="/login"]')).toBeTruthy();
+    expect(compiled.querySelector('a[href="/register"]')).toBeTruthy();
+    expect(compiled.querySelector('.app-navbar__user')).toBeNull();
+  });
+
+  it('shows the user menu after logging in and reverts to the logged-out state on logout', async () => {
+    vi.useFakeTimers();
+    const authMock = TestBed.inject(AuthMockService);
+    authMock
+      .register({ name: 'Ana García', email: 'navbar-user@example.com', password: 'secreto1' })
+      .subscribe();
+    await vi.advanceTimersByTimeAsync(400);
+    vi.useRealTimers();
+
+    const fixture = TestBed.createComponent(Navbar);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    expect(compiled.querySelector('.app-navbar__user')?.textContent).toContain('Ana García');
+    expect(compiled.querySelector('a[href="/login"]')).toBeNull();
+    expect(compiled.querySelector('a[href="/register"]')).toBeNull();
+
+    const logoutButton = compiled.querySelector('.app-navbar__user button') as HTMLButtonElement;
+    logoutButton.click();
+    fixture.detectChanges();
+
+    expect(compiled.querySelector('.app-navbar__user')).toBeNull();
+    expect(compiled.querySelector('a[href="/login"]')).toBeTruthy();
+    expect(compiled.querySelector('a[href="/register"]')).toBeTruthy();
   });
 });
