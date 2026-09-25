@@ -1,1 +1,7 @@
+@use "bootstrap/scss/bootstrap" with (
+  $primary: #2E7D32,
+  $secondary: #1565C0
+);
+@use "bootstrap-icons/font/bootstrap-icons.css";
+
 /* You can add global styles to this file, and also import other style files */
