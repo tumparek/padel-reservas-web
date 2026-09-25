@@ -1,6 +1,6 @@
 # SPEC 01 — Sistema de diseño y shell de la app
 
-> **Status:** Approved
+> **Status:** Implemented 
 > **Depends on:** Ninguno
 > **Date:** 2026-09-25
 > **Objective:** Establecer el shell visual de la aplicación (navbar, footer y layout base) con los tokens de color de Bootstrap y la convención de carpetas que usarán los specs futuros.
